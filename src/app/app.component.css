@@ -28,13 +28,9 @@
     left: .1em;
   } */
   
-  /* .contestants a {
-    color: #888;
-    text-decoration: none;
-    position: relative;
-    display: block;
-    width: 250px;
-  } */
+  .tabTitle {
+    font-size: large;
+  }
   
   /* .contestants a:hover {
     color:#607D8B;

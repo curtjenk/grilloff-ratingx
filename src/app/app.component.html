@@ -10,26 +10,58 @@
     </label>
   </div>
   <hr/>
-  <h4>Vote on Appearance, Taste and Texture</h4>
+  <h4>Vote on Taste, Appearance and Texture</h4>
   <hr />
   <ngb-tabset class="form-group">
-    <ngb-tab title="Appearance">
+    <ngb-tab>
+      <ng-template ngbTabTitle>
+        <span  class="tabTitle">Taste</span>
+      </ng-template>
       <ng-template ngbTabContent>
         <ul class="contestants">
           <li *ngFor="let c of contestants">
               <span class="badge">#{{c.id}}</span>
               <ngb-rating max="5"
                 class="star"
-                (rateChange)="rateChange('a',c,$event)"
+                (rateChange)="rateChange('taste',c,$event)"
               >
               </ngb-rating>
           </li>
         </ul>
       </ng-template>
     </ngb-tab>
-    <ngb-tab title="Taste">
+    <ngb-tab>
+      <ng-template ngbTabTitle>
+        <span  class="tabTitle">Appearance</span>
+      </ng-template>
       <ng-template ngbTabContent>
-        <p>Tastes really good</p>
+          <ul class="contestants">
+              <li *ngFor="let c of contestants">
+                  <span class="badge">#{{c.id}}</span>
+                  <ngb-rating max="5"
+                    class="star"
+                    (rateChange)="rateChange('appear',c,$event)"
+                  >
+                  </ngb-rating>
+              </li>
+            </ul>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab>
+      <ng-template ngbTabTitle>
+        <span  class="tabTitle">Texture</span>
+      </ng-template>
+      <ng-template ngbTabContent>
+          <ul class="contestants">
+              <li *ngFor="let c of contestants">
+                  <span class="badge">#{{c.id}}</span>
+                  <ngb-rating max="5"
+                    class="star"
+                    (rateChange)="rateChange('text',c,$event)"
+                  >
+                  </ngb-rating>
+              </li>
+            </ul>
       </ng-template>
     </ngb-tab>
   </ngb-tabset>
