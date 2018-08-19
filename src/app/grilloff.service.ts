@@ -11,7 +11,9 @@ export class GrilloffService {
   private contestants = [
     {id: 1, name: 'Anthony Chinn'},
     {id: 2, name: 'Darnell Tolbert'},
-    {id: 3, name: 'George Anderson'}
+    {id: 3, name: 'George Anderson'},
+    {id: 4, name: 'Victory Speight'},
+    {id: 5, name: 'Rodney Houston'},
   ];
   constructor() { }
 
