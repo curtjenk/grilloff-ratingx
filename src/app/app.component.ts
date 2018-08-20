@@ -27,10 +27,11 @@ export class AppComponent {
   }
   initialize() {
     this.results = [];
-    this.voterEmail = "";
+    this.voterEmail = '';
     this.doneTaste = false;
     this.doneText = false;
     this.doneAppear = false;
+    this.timeToVote = false;
   }
   getContestants() {
     this.grillOffService.getContestants()

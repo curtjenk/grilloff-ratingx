@@ -1,10 +1,13 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="wrapper container">
   <h1>
-    Legacy Builder's Annual Grill Off
+    Men's Annual Grill Off
   </h1>
-  <div *ngIf="!timeToVote" class="form-group"> 
-    <label for="email" class="control-label">Enter your email address</label>
+  <div *ngIf="!timeToVote" class="form-group mt-3"> 
+    <h4>
+      So, you want to be a judge ?
+    </h4>
+    <label for="email" class="control-label mt-2">Enter your email address</label>
     <input name="email" #email="ngModel" [class.is-invalid]="email.invalid && email.touched" required email [ngModel]="voterEmail"
       class="form-control" placeholder="name@abc.com">
     <span class="invalid-feedback" *ngIf="email.errors?.required && email.touched">
@@ -75,7 +78,7 @@
           <span class="tabTitle">Submit Your Vote</span>
         </ng-template>
         <ng-template ngbTabContent>
-          <button class="mt-4" type="submit" (click)="doneTaste=false;doneText=false;doneAppear=false;">Vote!</button>
+          <button class="mt-4" type="submit" (click)="vote()">Vote!</button>
         </ng-template>
       </ngb-tab>
     </ngb-tabset>
