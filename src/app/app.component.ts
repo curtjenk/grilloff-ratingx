@@ -16,6 +16,7 @@ export class AppComponent {
   doneTaste: boolean;
   doneText: boolean;
   doneAppear: boolean;
+  timeToVote = false;
 
   constructor(private grillOffService: GrilloffService) { }
 
@@ -42,7 +43,12 @@ export class AppComponent {
     console.log(this.results);
   }
 
+  getStarted() {
+    this.timeToVote = true;
+  }
+
   vote() {
     this.initialize();
   }
+
 }

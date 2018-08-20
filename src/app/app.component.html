@@ -3,90 +3,81 @@
   <h1>
     Legacy Builder's Annual Grill Off
   </h1>
-  <!-- <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="> -->
-  <div class="form-group">
+  <div *ngIf="!timeToVote" class="form-group"> 
     <label for="email" class="control-label">Enter your email address</label>
-    <input name="email" #email="ngModel"  [class.is-invalid]="email.invalid && email.touched"
-          required email [ngModel]="voterEmail" 
-          class="form-control" placeholder="name@abc.com">
-    <span class="invalid-feedback" *ngIf="email.errors?.required && email.touched" >
+    <input name="email" #email="ngModel" [class.is-invalid]="email.invalid && email.touched" required email [ngModel]="voterEmail"
+      class="form-control" placeholder="name@abc.com">
+    <span class="invalid-feedback" *ngIf="email.errors?.required && email.touched">
       Email is required
     </span>
-    <span class="invalid-feedback" *ngIf="email.errors?.email && email.touched" >
+    <span class="invalid-feedback" *ngIf="email.errors?.email && email.touched">
       Email is invalid
     </span>
-    <!-- <div>{{ voterEmail }}</div> -->
+    <div *ngIf="email.valid">
+      <button type="submit" (click)="getStarted()">Click To Get Started</button>
+    </div>
   </div>
-  <div *ngIf="email.valid">
+  <div *ngIf="timeToVote">
     <hr/>
     <h4>Vote on Taste, Appearance and Texture</h4>
     <hr/>
+    <ngb-tabset class="form-group">
+      <ngb-tab *ngIf="!doneTaste">
+        <ng-template ngbTabTitle>
+          <span class="tabTitle">Taste</span>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <span class="tabTitle">Taste</span>
+          <ul class="contestants">
+            <li *ngFor="let c of contestants">
+              <span class="badge">#{{c.id}}</span>
+              <ngb-rating max="5" class="star" (rateChange)="rateChange('taste',c,$event)">
+              </ngb-rating>
+            </li>
+          </ul>
+          <button type="button" (click)="doneTaste=true">Done With Taste</button>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab *ngIf="!doneAppear">
+        <ng-template ngbTabTitle>
+          <span class="tabTitle">Appearance</span>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <span class="tabTitle">Appearance</span>
+          <ul class="contestants">
+            <li *ngFor="let c of contestants">
+              <span class="badge">#{{c.id}}</span>
+              <ngb-rating max="5" class="star" (rateChange)="rateChange('appear',c,$event)">
+              </ngb-rating>
+            </li>
+          </ul>
+          <button type="button" (click)="doneAppear=true">Done With Appearance</button>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab *ngIf="!doneText">
+        <ng-template ngbTabTitle>
+          <span class="tabTitle">Texture</span>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <span class="tabTitle">Texture</span>
+          <ul class="contestants">
+            <li *ngFor="let c of contestants">
+              <span class="badge">#{{c.id}}</span>
+              <ngb-rating max="5" class="star" (rateChange)="rateChange('text',c,$event)">
+              </ngb-rating>
+            </li>
+          </ul>
+          <button type="button" (click)="doneText=true">Done With Texture</button>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab *ngIf="doneAppear && doneTaste && doneText">
+        <ng-template ngbTabTitle>
+          <span class="tabTitle">Submit Your Vote</span>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <button class="mt-4" type="submit" (click)="doneTaste=false;doneText=false;doneAppear=false;">Vote!</button>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
   </div>
-  <ngb-tabset *ngIf="email.valid" class="form-group">
-    <ngb-tab *ngIf="!doneTaste">
-      <ng-template ngbTabTitle>
-        <span  class="tabTitle">Taste</span>
-      </ng-template>
-      <ng-template ngbTabContent>
-        <span  class="tabTitle">Taste</span>
-        <ul class="contestants">
-          <li *ngFor="let c of contestants">
-            <span class="badge">#{{c.id}}</span>
-            <ngb-rating max="5"
-              class="star"
-              (rateChange)="rateChange('taste',c,$event)"
-            >
-            </ngb-rating>
-          </li>
-        </ul>
-        <button type="button" (click)="doneTaste=true">Done With Taste</button>
-      </ng-template>
-    </ngb-tab>
-    <ngb-tab *ngIf="!doneAppear">
-      <ng-template ngbTabTitle>
-        <span  class="tabTitle">Appearance</span>
-      </ng-template>
-      <ng-template ngbTabContent>
-        <span  class="tabTitle">Appearance</span>
-        <ul class="contestants">
-          <li *ngFor="let c of contestants">
-            <span class="badge">#{{c.id}}</span>
-            <ngb-rating max="5"
-              class="star"
-              (rateChange)="rateChange('appear',c,$event)"
-            >
-            </ngb-rating>
-          </li>
-        </ul>
-        <button type="button" (click)="doneAppear=true">Done With Appearance</button>
-      </ng-template>
-    </ngb-tab>
-    <ngb-tab *ngIf="!doneText">
-      <ng-template ngbTabTitle>
-        <span  class="tabTitle">Texture</span>
-      </ng-template>
-      <ng-template ngbTabContent>
-        <span  class="tabTitle">Texture</span>
-        <ul class="contestants">
-          <li *ngFor="let c of contestants">
-            <span class="badge">#{{c.id}}</span>
-            <ngb-rating max="5"
-              class="star"
-              (rateChange)="rateChange('text',c,$event)"
-            >
-            </ngb-rating>
-          </li>
-        </ul>
-        <button type="button" (click)="doneText=true">Done With Texture</button>
-      </ng-template>
-    </ngb-tab>
-    <ngb-tab *ngIf="doneAppear && doneTaste && doneText">
-      <ng-template ngbTabTitle>
-        <span  class="tabTitle">Submit Your Vote</span>
-      </ng-template>
-      <ng-template ngbTabContent>
-        <button class="mt-4" type="submit" (click)="doneTaste=false;doneText=false;doneAppear=false;" >Vote!</button>
-      </ng-template>
-    </ngb-tab>
-  </ngb-tabset>
 </div>
