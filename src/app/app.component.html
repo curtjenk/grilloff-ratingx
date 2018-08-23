@@ -1,4 +1,42 @@
-<!--The content below is only a placeholder and can be replaced.-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <span class="navbar-brand">Legacy Builders</span>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Link 1</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"href="#">Link 2</a>
+        </li>
+        <li class="nav-item dropdown" ngbDropdown> <!-- {1} -->
+            <a ngbDropdownToggle role="button"> <!-- {2} -->
+              Dropdown <span class="caret"></span></a>
+            <ul ngbDropdownMenu class="dropdown-menu"> <!-- {3} -->
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">One more separated link</a></li>
+            </ul>
+        </li>
+    </ul>
+  </div>
+</nav>
+<nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+  <div class="container">
+      <a class="navbar-brand">Legacy Builders</a>
+      <ul class="nav navbar-nav" routerLinkActive="active">
+          <li class="nav-item"><a class="nav-link" routerLink="home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="about">Login</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="courses">Judge</a></li>
+      </ul>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
+
 <div class="wrapper container">
   <h1>
     Men's Annual Grill Off
