@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { map, delay } from "rxjs/operators";
+import {map, delay, tap} from 'rxjs/operators';
 
 import { Person } from './person';
 
@@ -14,6 +14,8 @@ const httpOptions = {
 })
 export class GrillOffService {
 
+  private behaviorSubject = new BehaviorSubject(new Person());
+  currentUser = this.behaviorSubject.asObservable();
   private contestants = [
     {id: 1, name: 'Anthony Chinn',   email: '', type: 1, token: ''},
     {id: 2, name: 'Darnell Tolbert', email: '', type: 1, token: ''},
@@ -32,9 +34,18 @@ export class GrillOffService {
     return of(this.contestants[2]);
     // return this.http.get<Person>('/person');
   }
+  changeCurrentUser(person: Person) {
+    this.behaviorSubject.next(person);
+  }
 
   login(email: string): Observable<Person> {
-      return of( {id: 10, name: 'Mother Pippins',   email: '', type: 2, token: ''}).pipe(delay(3000));
+      const person = {id: 10, name: 'Mother Pippins',   email: '', type: 2, token: 'mptoken'};
+      const saveLocal = () => { localStorage.setItem('currentUser', JSON.stringify(person)); };
+      return of(person)
+        .pipe(
+          tap(saveLocal),
+          delay(3000)
+          );
     // return this.http.post<any>('/api/authenticate', {email: email}, httpOptions)
       // .pipe(map( (person) => {
       //   // login successful if there's a jwt token in the response

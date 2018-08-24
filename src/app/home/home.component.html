@@ -2,6 +2,11 @@
   <h1>Annual Grill Off</h1>
   <h2>2018</h2>
   <br/>
-  <h3>Login to judge the event</h3>
+  <div>
+    <h3 *ngIf="currentUser; else loggedOut">Hi {{currentUser.name}}!</h3>
+    <ng-template #loggedOut>
+      <h3>Login to judge the event</h3>
+    </ng-template>
+  </div>
 </div>
- 
+

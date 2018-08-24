@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GrillOffService } from '../grill-off.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   isNavbarCollapsed = true;
+  isLoggedIn = false;
 
-  constructor() { }
+  constructor(private grillOffService: GrillOffService) { }
 
   ngOnInit() {
+    this.grillOffService.behaviorSubject.subscribe()
   }
 
 }
