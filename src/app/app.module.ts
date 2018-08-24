@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { RouterModule, Routes } from '@angular/router';
-// import { AppBootstrapModule } from './app-bootstrap/app-bootstrap.module';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { JudgeComponent } from './judge/judge.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 export const appRoutes: Routes = [
   {
@@ -38,7 +38,7 @@ export const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    // NavbarComponent,
+    NavbarComponent,
     HomeComponent,
     LoginComponent,
     JudgeComponent
