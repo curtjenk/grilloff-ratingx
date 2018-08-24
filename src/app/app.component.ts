@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { Contestant } from './contestant';
+import { Person } from './person';
 import { EmailValidator } from '@angular/forms';
-import { GrilloffService } from './grilloff.service';
+import { GrillOffService } from './grill-off.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'grilloff-rating';
+export class AppComponent implements OnInit{
+  // title = 'grilloff-rating';
   voterEmail: string;
-  contestants: Contestant[];
+  contestants: Person[];
   results = [];
   doneTaste: boolean;
   doneText: boolean;
   doneAppear: boolean;
-  timeToVote = false;
+  // timeToVote = false;
 
-  constructor(private grillOffService: GrilloffService) { }
+  constructor(private grillOffService: GrillOffService) { }
 
   ngOnInit() {
     this.getContestants();
@@ -31,21 +31,17 @@ export class AppComponent {
     this.doneTaste = false;
     this.doneText = false;
     this.doneAppear = false;
-    this.timeToVote = false;
+    // this.timeToVote = false;
   }
   getContestants() {
     this.grillOffService.getContestants()
       .subscribe( contestants => this.contestants = contestants);
   }
 
-  rateChange(tab: string, contestant: Contestant, rate: number) {
+  rateChange(tab: string, contestant: Person, rate: number) {
     const key = `${tab}:${contestant.id}`;
     this.results[key] = {contestant: contestant, rate: rate};
     console.log(this.results);
-  }
-
-  getStarted() {
-    this.timeToVote = true;
   }
 
   vote() {

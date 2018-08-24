@@ -2,38 +2,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
-import { RouterModule, Routes } from '@angular/router';
-
+import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { JudgeComponent } from './judge/judge.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { AdminComponent } from './admin/admin.component';
 
-export const appRoutes: Routes = [
-  {
-      path: 'home',
-      component: HomeComponent
-  },
-  {
-      path: 'login',
-      component: LoginComponent
-  },
-  {
-      path: 'judge',
-      component: JudgeComponent
-  },
-  {
-      path: '',
-      redirectTo: '/home',
-      pathMatch: 'full'
-  },
-  {
-      path: '**',
-      redirectTo: '/home',
-      pathMatch: 'full'
-  }
-];
+import { AuthGuard } from './auth.guard';
+
 
 @NgModule({
   declarations: [
@@ -41,19 +20,17 @@ export const appRoutes: Routes = [
     NavbarComponent,
     HomeComponent,
     LoginComponent,
-    JudgeComponent
+    JudgeComponent,
+    AdminComponent
   ],
   imports: [
-    RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
-    ),
     BrowserModule,
+    HttpClientModule,
     NgbModule,
     FormsModule,
-    // AppBootstrapModule
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
