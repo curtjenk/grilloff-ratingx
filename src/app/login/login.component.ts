@@ -17,14 +17,15 @@ export class LoginComponent implements OnInit {
   constructor(
     private grillOffService: GrillOffService,
     private route: ActivatedRoute,
-    private router: Router,) { }
+    private router: Router) { }
 
   ngOnInit() {
     // reset login status
     this.grillOffService.logout();
 
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl =  '/';
   }
   login() {
     this.loading = true;

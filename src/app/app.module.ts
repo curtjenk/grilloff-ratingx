@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { HttpClientModule } from '@angular/common/http';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -12,6 +14,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AdminComponent } from './admin/admin.component';
 
 import { AuthGuard } from './auth.guard';
+import { ManageJudgesComponent } from './manage-judges/manage-judges.component';
+import { ManageContestantsComponent } from './manage-contestants/manage-contestants.component';
 
 
 @NgModule({
@@ -21,9 +25,12 @@ import { AuthGuard } from './auth.guard';
     HomeComponent,
     LoginComponent,
     JudgeComponent,
-    AdminComponent
+    AdminComponent,
+    ManageJudgesComponent,
+    ManageContestantsComponent
   ],
   imports: [
+    Ng2SmartTableModule,
     BrowserModule,
     HttpClientModule,
     NgbModule,

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Person } from './../person';
+import { GrillOffService } from '../grill-off.service';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +9,18 @@ import { Person } from './../person';
 })
 export class HomeComponent implements OnInit {
   currentUser: Person;
-  constructor() {}
+  constructor(private grillOffService: GrillOffService) {
+    this.grillOffService.currentUser
+    .subscribe( 
+      (resp) => {
+        console.log(`---Home Component ----:`);
+        this.currentUser = resp;
+      },
+      (error) => {});
+  }
 
   ngOnInit() {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    // this.currentUser = JSON.parse(localStorage.getItem('currentUser'));   
   }
 
 }

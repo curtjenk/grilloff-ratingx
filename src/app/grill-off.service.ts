@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, BehaviorSubject } from 'rxjs';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {map, delay, tap} from 'rxjs/operators';
 
 import { Person } from './person';
@@ -14,8 +14,8 @@ const httpOptions = {
 })
 export class GrillOffService {
 
-  private behaviorSubject = new BehaviorSubject(new Person());
-  currentUser = this.behaviorSubject.asObservable();
+  private _behaviorSubject: BehaviorSubject<Person> = new BehaviorSubject(new Person());
+  public readonly currentUser: Observable<Person> = this._behaviorSubject.asObservable();
   private contestants = [
     {id: 1, name: 'Anthony Chinn',   email: '', type: 1, token: ''},
     {id: 2, name: 'Darnell Tolbert', email: '', type: 1, token: ''},
@@ -23,28 +23,43 @@ export class GrillOffService {
     {id: 4, name: 'Victory Speight', email: '', type: 1, token: ''},
     {id: 5, name: 'Rodney Houston',  email: '', type: 1, token: ''},
   ];
+  private judges = [
+    {id: 11, name: 'Judge 1', email: '', type: 2, token: ''},
+    {id: 12, name: 'Judge 1', email: '', type: 2, token: ''},
+    {id: 13, name: 'Judge 1', email: '', type: 2, token: ''},
+    {id: 14, name: 'Judge 1', email: '', type: 2, token: ''},
+    {id: 15, name: 'Judge 1', email: '', type: 2, token: ''},
+  ];
   constructor(private http: HttpClient) { }
 
   getContestants(): Observable<Person[]> {
     return of(this.contestants);
     // return this.http.get<Person[]>('/contestants');
   }
+  getJudges(): Observable<Person[]> {
+    return of(this.judges);
+    // return this.http.get<Person[]>('/judges');
+  }
 
   getPersonById(id: number) {
     return of(this.contestants[2]);
     // return this.http.get<Person>('/person');
   }
-  changeCurrentUser(person: Person) {
-    this.behaviorSubject.next(person);
-  }
+  // changeCurrentUser(person: Person) {
+  //   this._behaviorSubject.next(person);
+  // }
 
   login(email: string): Observable<Person> {
-      const person = {id: 10, name: 'Mother Pippins',   email: '', type: 2, token: 'mptoken'};
-      const saveLocal = () => { localStorage.setItem('currentUser', JSON.stringify(person)); };
+      const person = {id: 10, name: 'Mother Pippins',   email: '', type: 0, token: 'mptoken'};
+      const saveLocal = () => {
+        console.log('---login---');
+        this._behaviorSubject.next(person);
+        localStorage.setItem('currentUser', JSON.stringify(person));
+      };
       return of(person)
         .pipe(
-          tap(saveLocal),
-          delay(3000)
+          delay(1500),
+          tap(saveLocal)
           );
     // return this.http.post<any>('/api/authenticate', {email: email}, httpOptions)
       // .pipe(map( (person) => {
@@ -59,6 +74,8 @@ export class GrillOffService {
 
   logout() {
     // remove user from local storage to log user out
+    console.log('----Service logout----');
+    this._behaviorSubject.next(new Person());
     localStorage.removeItem('currentUser');
   }
 }
