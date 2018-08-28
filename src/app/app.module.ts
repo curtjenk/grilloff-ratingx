@@ -16,6 +16,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AuthGuard } from './auth.guard';
 import { ManageJudgesComponent } from './manage-judges/manage-judges.component';
 import { ManageContestantsComponent } from './manage-contestants/manage-contestants.component';
+import { HighlightDirective } from './highlight.directive';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ManageContestantsComponent } from './manage-contestants/manage-contesta
     JudgeComponent,
     AdminComponent,
     ManageJudgesComponent,
-    ManageContestantsComponent
+    ManageContestantsComponent,
+    HighlightDirective
   ],
   imports: [
     Ng2SmartTableModule,

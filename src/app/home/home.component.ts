@@ -8,7 +8,8 @@ import { GrillOffService } from '../grill-off.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  currentUser: Person;
+  public color = 'blue';
+  public currentUser: Person;
   constructor(private grillOffService: GrillOffService) {
     this.grillOffService.currentUser
     .subscribe( 
