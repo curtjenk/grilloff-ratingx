@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Person } from './../person';
 import { GrillOffService } from '../grill-off.service';
+import { Person } from './../person';
+import { LocalDataSource } from 'ng2-smart-table';
+
 
 @Component({
   selector: 'app-manage-contestants',
@@ -9,7 +11,12 @@ import { GrillOffService } from '../grill-off.service';
 })
 export class ManageContestantsComponent implements OnInit {
   data: Person[];
+  source: LocalDataSource;
   settings = {
+    mode: 'inline',
+    edit:   { confirmSave: true },
+    add:    { confirmCreate: true },
+    delete: { confirmDelete: true },
     columns: {
       name: {
         title: 'Name'
@@ -25,12 +32,29 @@ export class ManageContestantsComponent implements OnInit {
 
   constructor(private grillOffService: GrillOffService) { }
 
+  onEdit(event) {
+    console.log(event);
+  }
+  
+  onCreate(event) {
+    console.log(event);
+    event.confirm.resolve();
+  }
+
+  onDelete(event) {
+    console.log(event);
+    event.confirm.resolve();
+  }
+
   ngOnInit() {
     this.getContestants();
   }
 
   getContestants() {
     this.grillOffService.getContestants()
-      .subscribe( contestants => this.data = contestants);
+      .subscribe( contestants => {
+         this.data = contestants;
+         this.source = new LocalDataSource(contestants);
+        });
   }
 }
