@@ -18,6 +18,9 @@ export class ManageContestantsComponent implements OnInit {
     add:    { confirmCreate: true },
     delete: { confirmDelete: true },
     columns: {
+      id: {
+        title: 'ID', editable: false
+      },
       name: {
         title: 'Name'
       },
@@ -33,17 +36,39 @@ export class ManageContestantsComponent implements OnInit {
   constructor(private grillOffService: GrillOffService) { }
 
   onEdit(event) {
-    console.log(event);
+    const {id, name, email} = event.newData;
+    if (name.length) {
+      const person = new Person(id, name, email, 1, null);
+      this.grillOffService.updateContestant(person)
+        .subscribe( (p: Person) => {
+          console.log('update contestant ', p);
+          event.confirm.resolve();
+        });
+    }
   }
-  
+
   onCreate(event) {
-    console.log(event);
-    event.confirm.resolve();
+    const {id, name, email} = event.newData;
+    if (name.length) {
+      const person = new Person(0, name, email, 1, null);
+      this.grillOffService.saveContestant(person)
+        .subscribe( (p: Person) => {
+          console.log('save contestant ', p);
+          event.confirm.resolve();
+        });
+    }
   }
 
   onDelete(event) {
-    console.log(event);
-    event.confirm.resolve();
+    const {id, name, email} = event.data;
+    if (name.length) {
+      const person = new Person(id, name, email, null, null);
+      this.grillOffService.deleteContestant(person)
+        .subscribe( (p: Person) => {
+          console.log('delete contestant ', p);
+          event.confirm.resolve();
+        });
+    }
   }
 
   ngOnInit() {

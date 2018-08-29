@@ -14,7 +14,7 @@ const httpOptions = {
 })
 export class GrillOffService {
 
-  private _behaviorSubject: BehaviorSubject<Person> = new BehaviorSubject(new Person());
+  private _behaviorSubject: BehaviorSubject<Person> = new BehaviorSubject(null);
   public readonly currentUser: Observable<Person> = this._behaviorSubject.asObservable();
   private contestants = [
     {id: 1, name: 'Anthony Chinn',   email: '', type: 1, token: ''},
@@ -35,6 +35,17 @@ export class GrillOffService {
   getContestants(): Observable<Person[]> {
     return of(this.contestants);
     // return this.http.get<Person[]>('/contestants');
+  }
+  saveContestant(newPerson: Person): Observable<Person> {
+    newPerson.type = 1;
+    newPerson.token = 'mptoken';
+    return of(newPerson);
+  }
+  updateContestant(person: Person): Observable<Person> {
+    return of(person);
+  }
+  deleteContestant(person: Person): Observable<Person> {
+    return of(person);
   }
   getJudges(): Observable<Person[]> {
     return of(this.judges);
@@ -75,7 +86,7 @@ export class GrillOffService {
   logout() {
     // remove user from local storage to log user out
     console.log('----Service logout----');
-    this._behaviorSubject.next(new Person());
+    this._behaviorSubject.next(null);
     localStorage.removeItem('currentUser');
   }
 }
