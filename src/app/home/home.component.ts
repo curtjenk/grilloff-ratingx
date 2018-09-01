@@ -10,18 +10,22 @@ import { GrillOffService } from '../grill-off.service';
 export class HomeComponent implements OnInit {
   public color = 'blue';
   public currentUser: Person;
-  constructor(private grillOffService: GrillOffService) {
-    this.grillOffService.currentUser
-    .subscribe( 
-      (resp) => {
-        console.log(`---Home Component ----:`);
-        this.currentUser = resp;
-      },
-      (error) => {});
-  }
+
+  constructor(private grillOffService: GrillOffService) {}
 
   ngOnInit() {
-    // this.currentUser = JSON.parse(localStorage.getItem('currentUser'));   
+    this.getUser();
+    // this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  }
+  getUser() {
+    this.grillOffService.currentUser
+      .subscribe( 
+        (resp) => {
+          // console.log(`---Home Component ----:${resp}`);
+          this.currentUser = resp;
+        },
+        (error) => {}
+      );
   }
 
 }

@@ -11,7 +11,7 @@ import { GrillOffService } from './grill-off.service';
 export class AppComponent implements OnInit{
   // title = 'grilloff-rating';
   voterEmail: string;
-  contestants: Person[];
+  // contestants: Person[];
   results = [];
   doneTaste: boolean;
   doneText: boolean;
@@ -21,7 +21,7 @@ export class AppComponent implements OnInit{
   constructor(private grillOffService: GrillOffService) { }
 
   ngOnInit() {
-    this.getContestants();
+    // this.getContestants();
     this.initialize();
     // console.log(this.contestants);
   }
@@ -34,8 +34,8 @@ export class AppComponent implements OnInit{
     // this.timeToVote = false;
   }
   getContestants() {
-    this.grillOffService.getContestants()
-      .subscribe( contestants => this.contestants = contestants);
+    // this.grillOffService.getContestants()
+    //   .subscribe( contestants => this.contestants = contestants);
   }
 
   rateChange(tab: string, contestant: Person, rate: number) {

@@ -1,12 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {map, delay, tap} from 'rxjs/operators';
+
+import {map, delay, tap, catchError} from 'rxjs/operators';
 
 import { Person } from './person';
 
+const baseUrl = {
+  contestants: 'api/contestant',
+  judges: 'api/judge',
+  user: 'api/user'
+};
+const host = 'http://127.0.0.1:8000';
+
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json; charset=utf-8',
+    'Access-Control-Allow-Origin': '*'
+  })
 };
 
 @Injectable({
@@ -30,22 +41,44 @@ export class GrillOffService {
     {id: 14, name: 'Judge 1', email: '', type: 2, token: ''},
     {id: 15, name: 'Judge 1', email: '', type: 2, token: ''},
   ];
+
   constructor(private http: HttpClient) { }
 
   getContestants(): Observable<Person[]> {
-    return of(this.contestants);
-    // return this.http.get<Person[]>('/contestants');
+    // console.log('service:getContestants');
+    // return of(this.contestants);
+    const url = host + '/' + baseUrl.contestants;
+    return this.http.get<Person[]>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError('getContestants', []))
+      );
   }
   saveContestant(newPerson: Person): Observable<Person> {
+    newPerson.id = null;
     newPerson.type = 1;
-    newPerson.token = 'mptoken';
-    return of(newPerson);
+    newPerson.token = '';
+    // return of(newPerson);
+    const url = host + '/' + baseUrl.contestants;
+    return this.http.post<Person>(url, newPerson, httpOptions)
+      .pipe(
+        catchError(this.handleError('saveContestant', newPerson))
+      );
   }
   updateContestant(person: Person): Observable<Person> {
-    return of(person);
+    // return of(person);
+    const url = host + '/' + baseUrl.contestants + '/' + person.id;
+    return this.http.put<Person>(url, person, httpOptions)
+      .pipe(
+        catchError(this.handleError('updateContestant', person))
+      );
   }
   deleteContestant(person: Person): Observable<Person> {
-    return of(person);
+    // return of(person);
+    const url = host + '/' + baseUrl.contestants + '/' + person.id;
+    return this.http.delete<Person>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError('deleteContestant', person))
+      );
   }
   getJudges(): Observable<Person[]> {
     return of(this.judges);
@@ -89,4 +122,23 @@ export class GrillOffService {
     this._behaviorSubject.next(null);
     localStorage.removeItem('currentUser');
   }
+  /**
+ * Handle Http operation that failed.
+ * Let the app continue.
+ * @param operation - name of the operation that failed
+ * @param result - optional value to return as the observable result
+ */
+private handleError<T> (operation = 'operation', result?: T) {
+  return (error: any): Observable<T> => {
+ 
+    // TODO: send the error to remote logging infrastructure
+    console.error(error); // log to console instead
+ 
+    // TODO: better job of transforming error for user consumption
+    // this.log(`${operation} failed: ${error.message}`);
+ 
+    // Let the app keep running by returning an empty result.
+    return of(result as T);
+  };
+}
 }

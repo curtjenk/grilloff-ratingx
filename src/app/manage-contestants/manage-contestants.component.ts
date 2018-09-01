@@ -54,6 +54,7 @@ export class ManageContestantsComponent implements OnInit {
       this.grillOffService.saveContestant(person)
         .subscribe( (p: Person) => {
           console.log('save contestant ', p);
+          this.getContestants();
           event.confirm.resolve();
         });
     }
@@ -66,6 +67,7 @@ export class ManageContestantsComponent implements OnInit {
       this.grillOffService.deleteContestant(person)
         .subscribe( (p: Person) => {
           console.log('delete contestant ', p);
+          this.getContestants();
           event.confirm.resolve();
         });
     }
