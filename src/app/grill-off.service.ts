@@ -89,36 +89,25 @@ export class GrillOffService {
     return of(this.contestants[2]);
     // return this.http.get<Person>('/person');
   }
-  // changeCurrentUser(person: Person) {
-  //   this._behaviorSubject.next(person);
-  // }
 
-  login(email: string): Observable<Person> {
-      const person = {id: 10, name: 'Mother Pippins',   email: '', type: 0, token: 'mptoken'};
-      const saveLocal = () => {
-        console.log('---login---');
-        this._behaviorSubject.next(person);
-        localStorage.setItem('currentUser', JSON.stringify(person));
-      };
-      return of(person)
-        .pipe(
-          delay(1500),
-          tap(saveLocal)
-          );
-    // return this.http.post<any>('/api/authenticate', {email: email}, httpOptions)
-      // .pipe(map( (person) => {
-      //   // login successful if there's a jwt token in the response
-      //   if (person && person.token) {
-      //     // store user details and jwt token in local storage to keep user logged in between page refreshes
-      //     localStorage.setItem('currentUser', JSON.stringify(person));
-      //   }
-      //   return person;
-      // }));
+  login(person: Person): Observable<Person> {
+    const saveLocal = (p) => {
+      this._behaviorSubject.next(p);
+      localStorage.setItem('currentUser', JSON.stringify(p));
+    };
+    const url = host + '/' + baseUrl.user;
+    const options = Object.assign(httpOptions, {params: {name: person.name, email: person.email}});
+
+    return this.http.get<Person>(url, options)
+      .pipe(
+        map(val => { saveLocal(val); return val; }),
+        catchError(this.handleError('login', null)),
+      );
   }
 
   logout() {
     // remove user from local storage to log user out
-    console.log('----Service logout----');
+    // console.log('----Service logout----');
     this._behaviorSubject.next(null);
     localStorage.removeItem('currentUser');
   }

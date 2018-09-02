@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { GrillOffService } from '../grill-off.service';
+import { Person } from '../person';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,8 @@ export class LoginComponent implements OnInit {
   }
   login() {
     this.loading = true;
-    this.grillOffService.login(this.model.username)
+    const person = new Person(0, this.model.username, this.model.email, null, null);
+    this.grillOffService.login(person)
       .pipe(first())
       .subscribe(
         data => {
