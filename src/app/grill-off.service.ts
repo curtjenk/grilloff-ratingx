@@ -9,7 +9,8 @@ import { Person } from './person';
 const baseUrl = {
   contestants: 'api/contestant',
   judges: 'api/judge',
-  user: 'api/user'
+  user: 'api/user',
+  vote: 'api/user/vote'
 };
 const host = 'http://127.0.0.1:8000';
 
@@ -27,20 +28,22 @@ export class GrillOffService {
 
   private _behaviorSubject: BehaviorSubject<Person> = new BehaviorSubject(null);
   public readonly currentUser: Observable<Person> = this._behaviorSubject.asObservable();
-  private contestants = [
-    {id: 1, name: 'Anthony Chinn',   email: '', type: 1, token: ''},
-    {id: 2, name: 'Darnell Tolbert', email: '', type: 1, token: ''},
-    {id: 3, name: 'George Anderson', email: '', type: 1, token: ''},
-    {id: 4, name: 'Victory Speight', email: '', type: 1, token: ''},
-    {id: 5, name: 'Rodney Houston',  email: '', type: 1, token: ''},
-  ];
-  private judges = [
-    {id: 11, name: 'Judge 1', email: '', type: 2, token: ''},
-    {id: 12, name: 'Judge 1', email: '', type: 2, token: ''},
-    {id: 13, name: 'Judge 1', email: '', type: 2, token: ''},
-    {id: 14, name: 'Judge 1', email: '', type: 2, token: ''},
-    {id: 15, name: 'Judge 1', email: '', type: 2, token: ''},
-  ];
+  public readonly currentUserValue = () => this._behaviorSubject.getValue();
+
+  // private contestants = [
+  //   {id: 1, name: 'Anthony Chinn',   email: '', type: 1, token: ''},
+  //   {id: 2, name: 'Darnell Tolbert', email: '', type: 1, token: ''},
+  //   {id: 3, name: 'George Anderson', email: '', type: 1, token: ''},
+  //   {id: 4, name: 'Victory Speight', email: '', type: 1, token: ''},
+  //   {id: 5, name: 'Rodney Houston',  email: '', type: 1, token: ''},
+  // ];
+  // private judges = [
+  //   {id: 11, name: 'Judge 1', email: '', type: 2, token: ''},
+  //   {id: 12, name: 'Judge 1', email: '', type: 2, token: ''},
+  //   {id: 13, name: 'Judge 1', email: '', type: 2, token: ''},
+  //   {id: 14, name: 'Judge 1', email: '', type: 2, token: ''},
+  //   {id: 15, name: 'Judge 1', email: '', type: 2, token: ''},
+  // ];
 
   constructor(private http: HttpClient) { }
 
@@ -81,13 +84,47 @@ export class GrillOffService {
       );
   }
   getJudges(): Observable<Person[]> {
-    return of(this.judges);
-    // return this.http.get<Person[]>('/judges');
+    const url = host + '/' + baseUrl.judges;
+    return this.http.get<Person[]>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError('getJudges', []))
+      );
+  }
+  saveJudge(newPerson: Person): Observable<Person> {
+    newPerson.id = null;
+    newPerson.type = 1;
+    newPerson.token = '';
+    // return of(newPerson);
+    const url = host + '/' + baseUrl.judges;
+    return this.http.post<Person>(url, newPerson, httpOptions)
+      .pipe(
+        catchError(this.handleError('saveJudge', newPerson))
+      );
+  }
+  updateJudge(person: Person): Observable<Person> {
+    // return of(person);
+    const url = host + '/' + baseUrl.judges + '/' + person.id;
+    return this.http.put<Person>(url, person, httpOptions)
+      .pipe(
+        catchError(this.handleError('updateJudge', person))
+      );
+  }
+  deleteJudge(person: Person): Observable<Person> {
+    // return of(person);
+    const url = host + '/' + baseUrl.judges + '/' + person.id;
+    return this.http.delete<Person>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError('deleteJudge', person))
+      );
   }
 
-  getPersonById(id: number) {
-    return of(this.contestants[2]);
-    // return this.http.get<Person>('/person');
+  vote(person: Person, vote: any): Observable<Person> {
+    const url = host + '/' + baseUrl.vote;
+    const body = Object.assign({vote: vote}, {person: person});
+    return this.http.post<Person>(url, body, httpOptions)
+      .pipe(
+        catchError(this.handleError('vote', person))
+      );
   }
 
   login(person: Person): Observable<Person> {
@@ -96,7 +133,7 @@ export class GrillOffService {
       localStorage.setItem('currentUser', JSON.stringify(p));
     };
     const url = host + '/' + baseUrl.user;
-    const options = Object.assign(httpOptions, {params: {name: person.name, email: person.email}});
+    const options = Object.assign({params: {name: person.name, email: person.email}, httpOptions});
 
     return this.http.get<Person>(url, options)
       .pipe(

@@ -18,9 +18,9 @@ export class ManageContestantsComponent implements OnInit {
     add:    { confirmCreate: true },
     delete: { confirmDelete: true },
     columns: {
-      id: {
-        title: 'ID', editable: false
-      },
+      // id: {
+      //   title: 'ID', editable: false
+      // },
       name: {
         title: 'Name'
       },
@@ -41,7 +41,7 @@ export class ManageContestantsComponent implements OnInit {
       const person = new Person(id, name, email, 1, null);
       this.grillOffService.updateContestant(person)
         .subscribe( (p: Person) => {
-          console.log('update contestant ', p);
+          // console.log('update contestant ', p);
           event.confirm.resolve();
         });
     }
@@ -53,7 +53,7 @@ export class ManageContestantsComponent implements OnInit {
       const person = new Person(0, name, email, 1, null);
       this.grillOffService.saveContestant(person)
         .subscribe( (p: Person) => {
-          console.log('save contestant ', p);
+          // console.log('save contestant ', p);
           this.getContestants();
           event.confirm.resolve();
         });
@@ -62,15 +62,13 @@ export class ManageContestantsComponent implements OnInit {
 
   onDelete(event) {
     const {id, name, email} = event.data;
-    if (name.length) {
-      const person = new Person(id, name, email, null, null);
-      this.grillOffService.deleteContestant(person)
-        .subscribe( (p: Person) => {
-          console.log('delete contestant ', p);
-          this.getContestants();
-          event.confirm.resolve();
-        });
-    }
+    const person = new Person(id, name, email, null, null);
+    this.grillOffService.deleteContestant(person)
+      .subscribe( (p: Person) => {
+        // console.log('delete contestant ', p);
+        this.getContestants();
+        event.confirm.resolve();
+      });
   }
 
   ngOnInit() {

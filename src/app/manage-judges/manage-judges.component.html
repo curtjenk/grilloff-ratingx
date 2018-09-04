@@ -1,3 +1,8 @@
-<p>
-  manage-judges works!
-</p>
+<ng2-smart-table 
+    [settings]="settings" 
+    [source]="source"
+    (editConfirm)="onEdit($event)"
+    (createConfirm)="onCreate($event)"
+    (deleteConfirm)="onDelete($event)"
+>
+</ng2-smart-table>

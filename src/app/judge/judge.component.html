@@ -1,3 +1,63 @@
-<p>
-  judge works!
-</p>
+<div class="">
+    <hr/>
+    <h4>Vote on Taste, Appearance and Texture</h4>
+    <hr/>
+    <ngb-tabset class="form-group">
+      <ngb-tab *ngIf="!doneTaste">
+        <ng-template ngbTabTitle>
+          <span class="tabTitle">Taste</span>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <span class="tabTitle">Taste</span>
+          <ul class="contestants">
+            <li *ngFor="let c of contestants">
+              <span class="badge">#{{c.id}}</span>
+              <ngb-rating max="5" class="star" (rateChange)="rateChange('taste',c,$event)">
+              </ngb-rating>
+            </li>
+          </ul>
+          <button type="button" (click)="doneTaste=true">Done With Taste</button>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab *ngIf="!doneAppear">
+        <ng-template ngbTabTitle>
+          <span class="tabTitle">Appearance</span>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <span class="tabTitle">Appearance</span>
+          <ul class="contestants">
+            <li *ngFor="let c of contestants">
+              <span class="badge">#{{c.id}}</span>
+              <ngb-rating max="5" class="star" (rateChange)="rateChange('appear',c,$event)">
+              </ngb-rating>
+            </li>
+          </ul>
+          <button type="button" (click)="doneAppear=true">Done With Appearance</button>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab *ngIf="!doneText">
+        <ng-template ngbTabTitle>
+          <span class="tabTitle">Texture</span>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <span class="tabTitle">Texture</span>
+          <ul class="contestants">
+            <li *ngFor="let c of contestants">
+              <span class="badge">#{{c.id}}</span>
+              <ngb-rating max="5" class="star" (rateChange)="rateChange('text',c,$event)">
+              </ngb-rating>
+            </li>
+          </ul>
+          <button type="button" (click)="doneText=true">Done With Texture</button>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab *ngIf="doneAppear && doneTaste && doneText">
+        <ng-template ngbTabTitle>
+          <span class="tabTitle">Submit Your Vote</span>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <button class="mt-4" type="submit" (click)="vote()">Vote!</button>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+</div>

@@ -16,9 +16,7 @@ export class NavbarComponent implements OnInit {
   constructor(
       private grillOffService: GrillOffService,
       private route: ActivatedRoute,
-      private router: Router)
-    {
-  }
+      private router: Router) {}
 
   ngOnInit() {
     this.grillOffService.currentUser
@@ -33,7 +31,10 @@ export class NavbarComponent implements OnInit {
       },
       (error) => {
         this.isLoggedIn = false;
-     });
+    });
+    if (!this.isLoggedIn) {
+      this.router.navigate(['/']);
+    }
   }
   logout() {
     console.log('----logout----');
