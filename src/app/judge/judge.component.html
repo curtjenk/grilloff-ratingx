@@ -12,7 +12,13 @@
           <ul class="contestants">
             <li *ngFor="let c of contestants">
               <span class="badge">#{{c.id}}</span>
-              <ngb-rating max="5" class="star" (rateChange)="rateChange('taste',c,$event)">
+              <ngb-rating [max]="maxStars" class="star" (rateChange)="rateChange('taste',c,$event)">
+                  <ng-template let-fill="fill" let-index="index">
+                      <span class="star" [class.filled]="fill === 100" 
+                        [class.bad]="index < 2" 
+                        [class.max]="index === (maxStars - 1)">&#9733;
+                      </span>
+                  </ng-template>
               </ngb-rating>
             </li>
           </ul>
@@ -28,7 +34,13 @@
           <ul class="contestants">
             <li *ngFor="let c of contestants">
               <span class="badge">#{{c.id}}</span>
-              <ngb-rating max="5" class="star" (rateChange)="rateChange('appear',c,$event)">
+              <ngb-rating [max]="maxStars" class="star" (rateChange)="rateChange('appear',c,$event)">
+                  <ng-template let-fill="fill" let-index="index">
+                      <span class="star" [class.filled]="fill === 100" 
+                        [class.bad]="index < 2" 
+                        [class.max]="index === (maxStars - 1)">&#9733;
+                      </span>
+                  </ng-template>
               </ngb-rating>
             </li>
           </ul>
@@ -44,7 +56,13 @@
           <ul class="contestants">
             <li *ngFor="let c of contestants">
               <span class="badge">#{{c.id}}</span>
-              <ngb-rating max="5" class="star" (rateChange)="rateChange('text',c,$event)">
+              <ngb-rating [max]="maxStars" class="star" (rateChange)="rateChange('text',c,$event)">
+                  <ng-template let-fill="fill" let-index="index">
+                      <span class="star" [class.filled]="fill === 100" 
+                        [class.bad]="index < 2" 
+                        [class.max]="index === (maxStars - 1)">&#9733;
+                      </span>
+                  </ng-template>
               </ngb-rating>
             </li>
           </ul>

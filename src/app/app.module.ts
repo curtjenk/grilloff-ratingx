@@ -17,6 +17,7 @@ import { AuthGuard } from './auth.guard';
 import { ManageJudgesComponent } from './manage-judges/manage-judges.component';
 import { ManageContestantsComponent } from './manage-contestants/manage-contestants.component';
 import { HighlightDirective } from './highlight.directive';
+import { MobxAngularModule } from 'mobx-angular';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { HighlightDirective } from './highlight.directive';
     HttpClientModule,
     NgbModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MobxAngularModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

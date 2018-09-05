@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { GrillOffService } from '../grill-off.service';
 import { Person } from './../person';
 import { Router, ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-judge',
@@ -9,12 +10,13 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./judge.component.css']
 })
 export class JudgeComponent implements OnInit {
+  maxStars: Number = 5;
   contestants: Person[];
   results: any = {};
   doneTaste: boolean;
   doneText: boolean;
   doneAppear: boolean;
-  // timeToVote = false;
+  private key: any;
 
   constructor(private grillOffService: GrillOffService, private router: Router) { }
 
@@ -40,15 +42,12 @@ export class JudgeComponent implements OnInit {
 
   vote() {
     const person: Person = this.grillOffService.currentUserValue();
-    console.log(person);
-    console.log(this.results);
-
     this.grillOffService.vote(person, this.results)
       .subscribe(
         (p) => {
           this.grillOffService.logout();
           this.router.navigate(['/']);
-          console.log(p);
+          // console.log(p);
         }
       );
   }
