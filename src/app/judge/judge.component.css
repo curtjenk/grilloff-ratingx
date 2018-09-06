@@ -78,7 +78,47 @@ button[type='button']:hover {
   margin-right: .8em;
   border-radius: 26px;
 }
-  
+.contestants .rate {
+  display: inline-block;
+  font-size: medium;
+  color: white;
+  padding: 0.8em 0.7em 0 0.7em;
+  background-color: yellow;
+  line-height: 1em;
+  position: relative;
+  left: -1px;
+  top: -4px;
+  height: 3.0em;
+  min-width: 52px;
+  max-width: 52px;
+  text-align: center;
+  margin-right: .8em;
+  border-radius: 4px;
+  transform:rotate(45deg);
+}
+.shape-section {
+  margin-left: 8px;
+  /* background: #222; */
+  /* border-bottom: 2px solid #555; */
+  /* border-top: 2px solid #555; */
+  /* margin-top: 30px; */
+  /* padding: 40px 0; */
+}
+.diamond-shape {
+  background: yellow;
+  height: 30px;
+  text-align: center;
+  transform:rotate(45deg);
+	width: 30px;
+}
+.shape-item {
+  color: black;
+  display: table-cell;
+  height: 30px;
+  transform: rotate(-45deg);
+  vertical-align: middle;
+	width: 30px;
+} 
 button {
   margin-top: 1em;
   background-color: #eee;

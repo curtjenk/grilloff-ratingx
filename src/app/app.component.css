@@ -1,66 +1,25 @@
 .wrapper {
     text-align: center;
 }
-/* .star {
-  font-size: 2.5rem;
-  color: blue;
+.shape-section {
+  background: #222;
+  border-bottom: 2px solid #555;
+  border-top: 2px solid #555;
+  margin-top: 30px;
+  padding: 40px 0;
 }
-.contestants {
-  margin: 2em 0 2em 0;
-  list-style-type: none;
-  padding: 0;
-  width: 20em;
+.diamond-shape {
+  background: #fff;
+  height: 60px;
+  text-align: center;
+  transform:rotate(45deg);
+	width:60px;
 }
-.contestants li {
-  position: relative;
-  margin: .8em;
-  padding: .3em 0;
-  height: 2.5em;
+.shape-item {
+  color: #333;
+  display: table-cell;
+  height: 60px;
+  transform: rotate(-45deg);
+  vertical-align: middle;
+	width:60px;
 }
-  
-.tabTitle {
-  font-size: large;
-}
-  
-.contestants .badge {
-  display: inline-block;
-  font-size: medium;
-  color: white;
-  padding: 0.8em 0.7em 0 0.7em;
-  background-color: #607D8B;
-  line-height: 1em;
-  position: relative;
-  left: -1px;
-  top: -4px;
-  height: 3.0em;
-  min-width: 16px;
-  text-align: right;
-  margin-right: .8em;
-  border-radius: 4px 0 0 4px;
-}
-  
-button {
-  margin-top: 1em;
-  background-color: #eee;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  cursor: hand;
-  font-family: Arial;
-}
-button[type='submit'] {
-  font-size: xx-large;
-}
-
-button:hover {
-  background-color: #40d684;
-}
-
-button.delete {
-  position: relative;
-  left: 194px;
-  top: -32px;
-  background-color: gray !important;
-  color: white;
-} */

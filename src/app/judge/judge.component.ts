@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { GrillOffService } from '../grill-off.service';
 import { Person } from './../person';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Observable, of } from 'rxjs';
 
 
 @Component({
@@ -33,8 +34,13 @@ export class JudgeComponent implements OnInit {
   rateChange(tab: string, contestant: Person, rate: number) {
     const key = `${tab}:${contestant.id}`;
     this.results[key] = {contestant: contestant, rate: rate};
+    contestant[tab] = rate;
+    console.log(contestant);
   }
 
+  showVote(key: string): Observable<number> {
+    return of(this.results[key].rate);
+  }
   vote() {
     const person: Person = this.grillOffService.currentUserValue();
     this.grillOffService.vote(person, this.results)

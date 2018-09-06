@@ -3,15 +3,29 @@
     <h4>Vote on Taste</h4>
     <ul class="contestants">
       <li *ngFor="let c of contestants">
-        <span class="badge">#{{c.id}}</span>
-        <ngb-rating [max]="maxStars" class="star" (rateChange)="rateChange('taste',c,$event)">
-            <ng-template let-fill="fill" let-index="index">
-                <span class="star" [class.filled]="fill === 100" 
-                  [class.bad]="index < 2" 
-                  [class.max]="index === (maxStars - 1)">&#9733;
-                </span>
-            </ng-template>
-        </ngb-rating>
+        <div class="row">
+          <div class="col-sm-2 mt-3">
+            <span class="badge">#{{c.id}}</span>
+          </div>
+          <div class="col-sm-6">
+            <ngb-rating [max]="maxStars" class="star" (rateChange)="rateChange('taste',c,$event)">
+                <ng-template let-fill="fill" let-index="index">
+                    <span class="star" [class.filled]="fill === 100" 
+                      [class.bad]="index < 2" 
+                      [class.max]="index === (maxStars - 1)">&#9733;
+                    </span>
+                </ng-template>
+            </ngb-rating>
+          </div>
+          <div class="col-sm-1 mt-3">
+            <div class="shape-section">
+              <div class="diamond-shape">
+                <span [hidden]="!c['taste']" class="shape-item">{{ c['taste'] }}</span>
+                <span [hidden]="c['taste']" class="shape-item">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </li>
     </ul>
     <button type="button" (click)="tab=1">Done With Taste</button>
@@ -20,15 +34,29 @@
     <h4>Vote on Appearance</h4>
     <ul class="contestants">
       <li *ngFor="let c of contestants">
-        <span class="badge">#{{c.id}}</span>
-        <ngb-rating [max]="maxStars" class="star" (rateChange)="rateChange('appear',c,$event)">
-            <ng-template let-fill="fill" let-index="index">
-                <span class="star" [class.filled]="fill === 100" 
-                  [class.bad]="index < 2" 
-                  [class.max]="index === (maxStars - 1)">&#9733;
-                </span>
-            </ng-template>
-        </ngb-rating>
+        <div class="row">
+          <div class="col-sm-2 mt-3">
+            <span class="badge">#{{c.id}}</span>
+          </div>
+          <div class="col-sm-6">
+            <ngb-rating [max]="maxStars" class="star" (rateChange)="rateChange('appear',c,$event)">
+                <ng-template let-fill="fill" let-index="index">
+                    <span class="star" [class.filled]="fill === 100" 
+                      [class.bad]="index < 2" 
+                      [class.max]="index === (maxStars - 1)">&#9733;
+                    </span>
+                </ng-template>
+            </ngb-rating>
+          </div>
+          <div class="col-sm-1 mt-3">
+            <div class="shape-section">
+              <div class="diamond-shape">
+                <span [hidden]="!c['appear']" class="shape-item">{{ c['appear'] }}</span>
+                <span [hidden]="c['appear']" class="shape-item">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </li>
     </ul>
     <button type="button" (click)="tab=2">Done With Appearance</button>
@@ -37,15 +65,29 @@
     <h4>Vote on Texture</h4>
     <ul class="contestants">
       <li *ngFor="let c of contestants">
-        <span class="badge">#{{c.id}}</span>
-        <ngb-rating [max]="maxStars" class="star" (rateChange)="rateChange('text',c,$event)">
-            <ng-template let-fill="fill" let-index="index">
-                <span class="star" [class.filled]="fill === 100" 
-                  [class.bad]="index < 2" 
-                  [class.max]="index === (maxStars - 1)">&#9733;
-                </span>
-            </ng-template>
-        </ngb-rating>
+        <div class="row">
+          <div class="col-sm-2 mt-3">
+            <span class="badge">#{{c.id}}</span>
+          </div>
+          <div class="col-sm-6">
+            <ngb-rating [max]="maxStars" class="star" (rateChange)="rateChange('text',c,$event)">
+                <ng-template let-fill="fill" let-index="index">
+                    <span class="star" [class.filled]="fill === 100" 
+                      [class.bad]="index < 2" 
+                      [class.max]="index === (maxStars - 1)">&#9733;
+                    </span>
+                </ng-template>
+            </ngb-rating>
+          </div>
+          <div class="col-sm-1 mt-3">
+            <div class="shape-section">
+              <div class="diamond-shape">
+                <span [hidden]="!c['text']" class="shape-item">{{ c['text'] }}</span>
+                <span [hidden]="c['text']" class="shape-item">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </li>
     </ul>
     <button type="button" (click)="tab=3">Done With Texture</button>
