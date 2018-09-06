@@ -5,7 +5,7 @@
   <div [appHighlight]="color">
     <h3 *ngIf="currentUser && currentUser.id; else loggedOut">Hi {{currentUser.name}}!</h3>
     <ng-template #loggedOut>
-      <h3>Login to judge the event</h3>
+      <h3>Click Login above to judge the event</h3>
     </ng-template>
   </div>
 </div>

@@ -13,9 +13,7 @@ export class JudgeComponent implements OnInit {
   maxStars: Number = 5;
   contestants: Person[];
   results: any = {};
-  doneTaste: boolean;
-  doneText: boolean;
-  doneAppear: boolean;
+  tab = 0;
   private key: any;
 
   constructor(private grillOffService: GrillOffService, private router: Router) { }
@@ -26,9 +24,6 @@ export class JudgeComponent implements OnInit {
   }
   initialize() {
     this.results = {};
-    this.doneTaste = false;
-    this.doneText = false;
-    this.doneAppear = false;
   }
   getContestants() {
     this.grillOffService.getContestants()
