@@ -10,7 +10,8 @@ const baseUrl = {
   contestants: 'api/contestant',
   judges: 'api/judge',
   user: 'api/user',
-  vote: 'api/user/vote'
+  vote: 'api/judge/vote',
+  tally: 'api/judge/tally'
 };
 const host = 'http://127.0.0.1:8000';
 

@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { GrillOffService } from '../grill-off.service';
 import { Person } from './../person';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable, of } from 'rxjs';
+// import { Observable, of } from 'rxjs';
 
 
 @Component({
@@ -15,9 +15,10 @@ export class JudgeComponent implements OnInit {
   contestants: Person[];
   results: any = {};
   tab = 0;
-  private key: any;
+  // private key: any;
 
-  constructor(private grillOffService: GrillOffService, private router: Router) { }
+  constructor(private grillOffService: GrillOffService, 
+              private router: Router) { }
 
   ngOnInit() {
     this.getContestants();
@@ -32,18 +33,18 @@ export class JudgeComponent implements OnInit {
   }
 
   rateChange(tab: string, contestant: Person, rate: number) {
-    const key = `${tab}:${contestant.id}`;
-    this.results[key] = {contestant: contestant, rate: rate};
+    // const key = `${tab}:${contestant.id}`;
+    // this.results[key] = {contestant: contestant, rate: rate};
+    const ndx = this.contestants.findIndex(item => item.id === contestant.id);
+    this.contestants[ndx][tab] = rate;
     contestant[tab] = rate;
-    console.log(contestant);
+    // console.log(contestant);
   }
 
-  showVote(key: string): Observable<number> {
-    return of(this.results[key].rate);
-  }
   vote() {
+    console.log(this.contestants);
     const person: Person = this.grillOffService.currentUserValue();
-    this.grillOffService.vote(person, this.results)
+    this.grillOffService.vote(person, this.contestants)
       .subscribe(
         (p) => {
           this.grillOffService.logout();
