@@ -6,6 +6,7 @@ import { HomeComponent } from '../home/home.component';
 import { AdminComponent } from '../admin/admin.component';
 import { LoginComponent } from '../login/login.component';
 import { JudgeComponent } from '../judge/judge.component';
+import { ResultsComponent } from '../results/results.component';
 import { ManageContestantsComponent } from '../manage-contestants/manage-contestants.component';
 import { ManageJudgesComponent } from '../manage-judges/manage-judges.component';
 import { AuthGuard } from '../auth.guard';
@@ -27,6 +28,10 @@ export const appRoutes: Routes = [
   {
     path: 'admin/judges',
     component: ManageJudgesComponent, canActivate: [AuthGuard]
+  },
+  {
+    path: 'admin/results',
+    component: ResultsComponent, canActivate: [AuthGuard]
   },
   {
     path: 'home',

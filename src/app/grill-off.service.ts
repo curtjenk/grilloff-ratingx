@@ -11,7 +11,7 @@ const baseUrl = {
   judges: 'api/judge',
   user: 'api/user',
   vote: 'api/judge/vote',
-  tally: 'api/judge/tally'
+  results: 'api/judge/results'
 };
 const host = 'http://127.0.0.1:8000';
 
@@ -47,6 +47,14 @@ export class GrillOffService {
   // ];
 
   constructor(private http: HttpClient) { }
+
+  getResults(): Observable<any> {
+    const url = host + '/' + baseUrl.results;
+    return this.http.get<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError('getContestants', []))
+      );
+  }
 
   getContestants(): Observable<Person[]> {
     // console.log('service:getContestants');

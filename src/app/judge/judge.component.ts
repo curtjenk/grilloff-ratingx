@@ -17,7 +17,7 @@ export class JudgeComponent implements OnInit {
   tab = 0;
   // private key: any;
 
-  constructor(private grillOffService: GrillOffService, 
+  constructor(private grillOffService: GrillOffService,
               private router: Router) { }
 
   ngOnInit() {

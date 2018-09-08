@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <button (click)="getResults()">Refresh</button>
+  </div>
+  <div class="row mt-2">
+    <table class="table table-stripped">
+      <thead class="thead-light">
+        <tr>
+          <th>Name</th>
+          <th>Taste</th>
+          <th>Texture</th>
+          <th>Appearance</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of results">
+          <td>{{r.name}}</td>
+          <td>{{r.taste}}</td>
+          <td>{{r.texture}}</td>
+          <td>{{r.appearance}}</td>
+          <td>{{r.total}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

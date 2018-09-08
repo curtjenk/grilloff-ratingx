@@ -18,6 +18,7 @@ import { ManageJudgesComponent } from './manage-judges/manage-judges.component';
 import { ManageContestantsComponent } from './manage-contestants/manage-contestants.component';
 import { HighlightDirective } from './highlight.directive';
 import { MobxAngularModule } from 'mobx-angular';
+import { ResultsComponent } from './results/results.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { MobxAngularModule } from 'mobx-angular';
     AdminComponent,
     ManageJudgesComponent,
     ManageContestantsComponent,
-    HighlightDirective
+    HighlightDirective,
+    ResultsComponent
   ],
   imports: [
     Ng2SmartTableModule,
