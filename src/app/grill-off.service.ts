@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {map, delay, tap, catchError} from 'rxjs/operators';
 
 import { Person } from './person';
+import { environment } from '../environments/environment';
 
 const baseUrl = {
   contestants: 'api/contestant',
@@ -13,7 +14,7 @@ const baseUrl = {
   vote: 'api/judge/vote',
   results: 'api/judge/results'
 };
-const host = 'http://127.0.0.1:8000';
+const host = environment.apiUrl;
 
 const httpOptions = {
   headers: new HttpHeaders({

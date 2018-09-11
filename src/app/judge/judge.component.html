@@ -1,4 +1,7 @@
 <div class="">
+  <div *ngIf="error" class="alert alert-danger" role="alert">
+    Please vote for all contestants
+  </div>
   <div *ngIf="tab===0">
     <h4>Vote on Taste</h4>
     <ul class="contestants">
@@ -28,7 +31,7 @@
         </div>
       </li>
     </ul>
-    <button type="button" (click)="tab=1">Done With Taste</button>
+    <button type="button" (click)="doneWithTab('taste')">Done With Taste</button>
   </div>
   <div *ngIf="tab===1">
     <h4>Vote on Appearance</h4>

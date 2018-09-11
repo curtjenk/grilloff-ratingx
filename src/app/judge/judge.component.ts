@@ -11,45 +11,51 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./judge.component.css']
 })
 export class JudgeComponent implements OnInit {
+  error = false;
   maxStars: Number = 5;
   contestants: Person[];
   results: any = {};
   tab = 0;
-  // private key: any;
 
   constructor(private grillOffService: GrillOffService,
               private router: Router) { }
 
   ngOnInit() {
-    this.getContestants();
-    this.initialize();
-  }
-  initialize() {
     this.results = {};
+    this.getContestants();
   }
+
   getContestants() {
     this.grillOffService.getContestants()
-      .subscribe( contestants => this.contestants = contestants);
+      .subscribe( contestants =>  {
+        this.contestants = contestants;
+      });
   }
 
   rateChange(tab: string, contestant: Person, rate: number) {
-    // const key = `${tab}:${contestant.id}`;
-    // this.results[key] = {contestant: contestant, rate: rate};
     const ndx = this.contestants.findIndex(item => item.id === contestant.id);
     this.contestants[ndx][tab] = rate;
     contestant[tab] = rate;
-    // console.log(contestant);
+    this.error = false;
   }
 
+  doneWithTab(tab: string) {
+    const count = this.contestants.filter(c => c[tab]).length;
+    if (count === this.contestants.length) {
+      this.tab += 1;
+      this.error = false;
+    } else {
+      this.error = true;
+    }
+    console.log('count=', count);
+  }
   vote() {
-    console.log(this.contestants);
     const person: Person = this.grillOffService.currentUserValue();
     this.grillOffService.vote(person, this.contestants)
       .subscribe(
         (p) => {
           this.grillOffService.logout();
           this.router.navigate(['/']);
-          // console.log(p);
         }
       );
   }
