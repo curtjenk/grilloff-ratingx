@@ -66,13 +66,13 @@ button[type='button']:hover {
   display: inline-block;
   font-size: medium;
   color: white;
-  padding: 0.8em 0.7em 0 0.7em;
+  padding: 0.5em 0.7em 0 0.7em;
   background-color: #607D8B;
   line-height: 1em;
   position: relative;
   left: -1px;
-  top: -4px;
-  height: 3.0em;
+  top: 0px;
+  height: 2.0em;
   min-width: 52px;
   max-width: 52px;
   text-align: center;
@@ -107,18 +107,18 @@ button[type='button']:hover {
 }
 .diamond-shape {
   background: yellow;
-  height: 30px;
+  height: 25px;
   text-align: center;
   transform:rotate(45deg);
-	width: 30px;
+	width: 25px;
 }
 .shape-item {
   color: black;
   display: table-cell;
-  height: 30px;
+  height: 25px;
   transform: rotate(-45deg);
   vertical-align: middle;
-	width: 30px;
+	width: 25px;
 } 
 button {
   margin-top: 1em;
