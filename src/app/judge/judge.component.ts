@@ -47,16 +47,17 @@ export class JudgeComponent implements OnInit {
     } else {
       this.error = true;
     }
-    console.log('count=', count);
+    // console.log('count=', count);
   }
   vote() {
+    // TODO: handle the already voted case
     const person: Person = this.grillOffService.currentUserValue();
     this.grillOffService.vote(person, this.contestants)
       .subscribe(
         (p) => {
-          this.grillOffService.logout();
-          this.router.navigate(['/']);
-        }
+          // this.grillOffService.logout();
+          this.router.navigate(['/admin/results']);
+        },
       );
   }
 

@@ -1,16 +1,18 @@
 <div class="container">
-  <div class="row">
-      <button [disabled]="confirming" (click)="confirming=true" type="button" class="btn btn-warning btn-block">Delete Voting Results</button>
-  </div>
-  <div *ngIf="confirming" class="row mt-1 mb-3">
-      <div class="col">
-        <button (click)="confirming=false" type="button" class="btn btn-secondary btn-block">Stop</button>
-      </div>
-      <div class="col">
-        <button (click)="deleteResults(); confirming=false" type="button" class="ml-2 btn btn-danger btn-block">Do It!</button>
-      </div>
+  <span *ngIf="isAdmin">
+    <div class="row">
+        <button [disabled]="confirming" (click)="confirming=true" type="button" class="btn btn-warning btn-block">Delete Voting Results</button>
     </div>
-  <hr/>
+    <div *ngIf="confirming" class="row mt-1 mb-3">
+        <div class="col">
+          <button (click)="confirming=false" type="button" class="btn btn-secondary btn-block">Stop</button>
+        </div>
+        <div class="col">
+          <button (click)="deleteResults(); confirming=false" type="button" class="ml-2 btn btn-danger btn-block">Do It!</button>
+        </div>
+      </div>
+    <hr/>
+  </span>
   <div class="row mt-2">
     <button [disabled]="loading" (click)="getResults()" type="button" class="btn btn-primary">Refresh</button>
     <span *ngIf="loading">
@@ -22,16 +24,18 @@
     <table class="table table-stripped">
       <thead class="thead-light">
         <tr>
-          <th>Name</th>
+          <th>ID</th>
+          <th *ngIf="isAdmin">Name</th>
           <th>Taste</th>
           <th>Texture</th>
-          <th>Appearance</th>
+          <th>Appear</th>
           <th>Total</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let r of results">
-          <td>{{r.name}}</td>
+          <td>{{r.id}}</td>
+          <td *ngIf="isAdmin">{{r.name}}</td>
           <td>{{r.taste}}</td>
           <td>{{r.texture}}</td>
           <td>{{r.appearance}}</td>

@@ -12,6 +12,7 @@ export class NavbarComponent implements OnInit {
   isNavbarCollapsed = true;
   isLoggedIn = false;
   currentUser: Person;
+  isAdmin: Boolean = false;
 
   constructor(
       private grillOffService: GrillOffService,
@@ -25,8 +26,10 @@ export class NavbarComponent implements OnInit {
           if (person && person.id) {
             this.currentUser = person;
             this.isLoggedIn = true;
+            this.isAdmin = person.type === 0 ? true : false;
           } else {
             this.isLoggedIn = false;
+            this.isAdmin = false;
           }
       },
       (error) => {
@@ -37,7 +40,7 @@ export class NavbarComponent implements OnInit {
     }
   }
   logout() {
-    console.log('----logout----');
+    // console.log('----logout----');
     this.grillOffService.logout();
     this.router.navigate(['/']);
   }

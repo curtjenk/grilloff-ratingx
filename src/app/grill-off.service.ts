@@ -57,13 +57,13 @@ export class GrillOffService {
         catchError(this.handleError('getResults', []))
       );
   }
-  
-  deleteResults(): Observable<any> {
+
+  deleteResults(): Observable<HttpResponse<any>> {
+    const person: Person = JSON.parse(localStorage.getItem('currentUser'));
     const url = host + '/' + baseUrl.results;
-    return this.http.delete<any>(url, httpOptions)
-      .pipe(
-        catchError(this.handleError('deleteResults', []))
-      );
+    const options: {} = Object.assign(
+        {params: {name: person.name}}, {observe: 'response'}, httpOptions);
+    return this.http.delete<any>(url, options);
   }
 
   getContestants(): Observable<Person[]> {

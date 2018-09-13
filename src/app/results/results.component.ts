@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GrillOffService } from '../grill-off.service';
 import { timer } from 'rxjs';
+import { Person } from './../person';
 
 @Component({
   selector: 'app-results',
@@ -11,9 +12,13 @@ export class ResultsComponent implements OnInit, OnDestroy {
   loading = false;
   looper = null;
   results = [];
+  isAdmin: Boolean = false;
+
   constructor(private grillOffService: GrillOffService) { }
 
   ngOnInit() {
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    this.isAdmin = user.type === 0 ? true : false;
     this.getResults();
     this.startLoop();
   }
@@ -32,13 +37,13 @@ export class ResultsComponent implements OnInit, OnDestroy {
     this.looper = setInterval(() => {
       this.loading = true; 
       timer(5000).subscribe( () => this.getResults() );
-    }, 15000);
+    }, 20000);
   }
 
   stopLoop() {
     clearInterval(this.looper);
     this.looper = null;
-    console.log('stopped the looper');
+    // console.log('stopped the looper');
   }
   getResults() {
     this.grillOffService.getResults()

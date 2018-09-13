@@ -1,19 +1,11 @@
-<!-- <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
-  <div class="container-fluid">
-      <a class="navbar-brand" href="#">Legacy Builder's</a>
-      <ul class="nav navbar-nav" routerLinkActive="active">
-          <li class="nav-item"><a class="nav-link" routerLink="home">Home</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="about">Login</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="courses">Judge</a></li>
-      </ul>
-  </div>
-</nav> -->
+
 <nav class="navbar navbar-expand navbar-dark bg-primary fixed-top">
     <span class="navbar-brand text-white">Legacy Builders</span>
     <div class="navbar-nav">
         <span *ngIf="!isLoggedIn"><a class="nav-item nav-link text-white" routerLink="/login">Login</a></span>
         <span *ngIf="isLoggedIn"><a class="nav-item nav-link text-white" href="#" (click)="logout()">Logout</a></span>
         <span *ngIf="isLoggedIn"><a class="nav-item nav-link text-white"routerLink="/judge">Judge</a></span>
-        <span *ngIf="isLoggedIn && currentUser.type==0"><a class="nav-item nav-link text-white" routerLink="/admin">Admin</a></span>
+        <span *ngIf="isLoggedIn && !isAdmin"><a class="nav-item nav-link text-white" routerLink="/admin/results">Results</a></span>
+        <span *ngIf="isLoggedIn && isAdmin"><a class="nav-item nav-link text-white" routerLink="/admin">Admin</a></span>
     </div>
 </nav>
