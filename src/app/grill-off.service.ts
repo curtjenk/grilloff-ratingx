@@ -54,7 +54,15 @@ export class GrillOffService {
     const url = host + '/' + baseUrl.results;
     return this.http.get<any>(url, httpOptions)
       .pipe(
-        catchError(this.handleError('getContestants', []))
+        catchError(this.handleError('getResults', []))
+      );
+  }
+  
+  deleteResults(): Observable<any> {
+    const url = host + '/' + baseUrl.results;
+    return this.http.delete<any>(url, httpOptions)
+      .pipe(
+        catchError(this.handleError('deleteResults', []))
       );
   }
 

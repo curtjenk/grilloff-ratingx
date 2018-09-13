@@ -22,6 +22,12 @@ export class ResultsComponent implements OnInit, OnDestroy {
     this.stopLoop();
   }
 
+  // Sends a request to delete the voting resutlts !!!
+  deleteResults() {
+    this.grillOffService.deleteResults()
+    .subscribe( res => {});
+  }
+
   private startLoop() {
     this.looper = setInterval(() => {
       this.loading = true; 

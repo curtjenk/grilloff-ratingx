@@ -1,9 +1,18 @@
 <div class="container">
   <div class="row">
-      <!-- <button [disabled]="loading" (click)="clearResults()">Delete Voting Results</button> -->
+      <button [disabled]="confirming" (click)="confirming=true" type="button" class="btn btn-warning btn-block">Delete Voting Results</button>
   </div>
-  <div class="row">
-    <button [disabled]="loading" (click)="getResults()">Refresh</button>
+  <div *ngIf="confirming" class="row mt-1 mb-3">
+      <div class="col">
+        <button (click)="confirming=false" type="button" class="btn btn-secondary btn-block">Stop</button>
+      </div>
+      <div class="col">
+        <button (click)="deleteResults(); confirming=false" type="button" class="ml-2 btn btn-danger btn-block">Do It!</button>
+      </div>
+    </div>
+  <hr/>
+  <div class="row mt-2">
+    <button [disabled]="loading" (click)="getResults()" type="button" class="btn btn-primary">Refresh</button>
     <span *ngIf="loading">
        &nbsp;Wait!
        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
