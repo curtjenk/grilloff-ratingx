@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GrillOffService } from '../grill-off.service';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-results',
@@ -7,7 +8,7 @@ import { GrillOffService } from '../grill-off.service';
   styleUrls: ['./results.component.css']
 })
 export class ResultsComponent implements OnInit, OnDestroy {
-
+  loading = false;
   looper = null;
   results = [];
   constructor(private grillOffService: GrillOffService) { }
@@ -23,8 +24,9 @@ export class ResultsComponent implements OnInit, OnDestroy {
 
   private startLoop() {
     this.looper = setInterval(() => {
-      this.getResults();
-    }, 20000);
+      this.loading = true; 
+      timer(5000).subscribe( () => this.getResults() );
+    }, 15000);
   }
 
   stopLoop() {
@@ -34,6 +36,6 @@ export class ResultsComponent implements OnInit, OnDestroy {
   }
   getResults() {
     this.grillOffService.getResults()
-      .subscribe( results => this.results = results);
+        .subscribe( results => {this.results = results; this.loading = false; });
   }
 }

@@ -18,15 +18,15 @@ export class ManageContestantsComponent implements OnInit {
     add:    { confirmCreate: true },
     delete: { confirmDelete: true },
     columns: {
-      // id: {
-      //   title: 'ID', editable: false
-      // },
+      id: {
+        title: 'ID', addable: false, editable: false
+      },
       name: {
         title: 'Name'
       },
-      email: {
-        title: 'Email'
-      }
+      // email: {
+      //   title: 'Email'
+      // }
     },
     attr: {
         class: 'table table-bordered'

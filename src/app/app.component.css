@@ -1,4 +1,8 @@
+body {
+  
+}
 .wrapper {
+    font-size: 0.8rem !important;
     text-align: center;
 }
 .shape-section {

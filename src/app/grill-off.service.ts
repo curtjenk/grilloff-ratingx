@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, BehaviorSubject } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import {map, delay, tap, catchError} from 'rxjs/operators';
 
 import { Person } from './person';
 import { environment } from '../environments/environment';
+import { validateConfig } from '@angular/router/src/config';
 
 const baseUrl = {
   contestants: 'api/contestant',
@@ -137,19 +138,20 @@ export class GrillOffService {
       );
   }
 
-  login(person: Person): Observable<Person> {
+  login(person: Person): Observable<HttpResponse<Person>> {
     const saveLocal = (p) => {
       this._behaviorSubject.next(p);
       localStorage.setItem('currentUser', JSON.stringify(p));
     };
     const url = host + '/' + baseUrl.user;
-    const options = Object.assign({params: {name: person.name, email: person.email}, httpOptions});
+    const options: {} = Object.assign({params: {name: person.name, email: person.email}}, 
+                                  {observe: 'response'},
+                                   httpOptions);
     // saveLocal(this.judges[2]);
     // return of(this.judges[2]);
-    return this.http.get<Person>(url, options)
+    return this.http.get<HttpResponse<Person>>(url, options)
       .pipe(
-        map(val => { saveLocal(val); return val; }),
-        catchError(this.handleError('login', null)),
+        tap( val => saveLocal(val.body))
       );
   }
 

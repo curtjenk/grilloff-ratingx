@@ -17,7 +17,7 @@ import { AuthGuard } from './auth.guard';
 import { ManageJudgesComponent } from './manage-judges/manage-judges.component';
 import { ManageContestantsComponent } from './manage-contestants/manage-contestants.component';
 import { HighlightDirective } from './highlight.directive';
-import { MobxAngularModule } from 'mobx-angular';
+// import { MobxAngularModule } from 'mobx-angular';
 import { ResultsComponent } from './results/results.component';
 
 
@@ -41,7 +41,7 @@ import { ResultsComponent } from './results/results.component';
     NgbModule,
     FormsModule,
     AppRoutingModule,
-    MobxAngularModule
+    // MobxAngularModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

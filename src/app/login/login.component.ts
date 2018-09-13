@@ -13,6 +13,7 @@ import { Person } from '../person';
 export class LoginComponent implements OnInit {
   model: any = {};
   loading = false;
+  error = false;
   returnUrl: string;
 
   constructor(
@@ -30,16 +31,18 @@ export class LoginComponent implements OnInit {
   }
   login() {
     this.loading = true;
+    this.error = false;
     const person = new Person(0, this.model.username, this.model.email, null, null);
     this.grillOffService.login(person)
-      .pipe(first())
+      // .pipe(first())
       .subscribe(
         data => {
             this.router.navigate([this.returnUrl]);
           },
         error => {
             this.loading = false;
-            // console.log(error);
+            this.error = true;
+            console.log(error);
         });
   }
 }
