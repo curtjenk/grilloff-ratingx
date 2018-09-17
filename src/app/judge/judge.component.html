@@ -62,7 +62,7 @@
         </div>
       </li>
     </ul>
-    <button type="button" (click)="tab=2">Done With Appearance</button>
+    <button type="button" (click)="doneWithTab('appear')">Done With Appearance</button>
   </div>
   <div *ngIf="tab===2">
     <h4>Vote on Texture</h4>
@@ -93,7 +93,7 @@
         </div>
       </li>
     </ul>
-    <button type="button" (click)="tab=3">Done With Texture</button>
+    <button type="button" (click)="doneWithTab('text')">Done With Texture</button>
   </div>
   <div *ngIf="tab===3">
     <h4>Submit Your Vote!</h4>

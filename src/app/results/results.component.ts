@@ -30,7 +30,7 @@ export class ResultsComponent implements OnInit, OnDestroy {
   // Sends a request to delete the voting resutlts !!!
   deleteResults() {
     this.grillOffService.deleteResults()
-    .subscribe( res => {});
+    .subscribe( () => this.getResults());
   }
 
   private startLoop() {
