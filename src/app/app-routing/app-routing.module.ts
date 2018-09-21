@@ -18,11 +18,6 @@ export const appRoutes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: '**',
-    redirectTo: '/home',
-    pathMatch: 'full'
-  },
-  {
     path: 'admin',
     children: [
       { 
@@ -55,7 +50,13 @@ export const appRoutes: Routes = [
   {
     path: 'judge',
     component: JudgeComponent, canActivate: [AuthGuard]
-  }
+  },  
+  {
+    path: '**',
+    redirectTo: '/home',
+    pathMatch: 'full'
+  },
+
 ];
 @NgModule({
   imports: [

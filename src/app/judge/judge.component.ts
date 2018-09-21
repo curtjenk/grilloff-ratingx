@@ -3,7 +3,8 @@ import { GrillOffService } from '../grill-off.service';
 import { Person } from './../person';
 import { Router, ActivatedRoute } from '@angular/router';
 // import { Observable, of } from 'rxjs';
-
+import { first } from 'rxjs/operators';
+import { Observable, pipe } from 'rxjs';
 
 @Component({
   selector: 'app-judge',
@@ -26,7 +27,7 @@ export class JudgeComponent implements OnInit {
   }
 
   getContestants() {
-    this.grillOffService.getContestants()
+    this.grillOffService.getContestants().pipe(first())
       .subscribe( contestants =>  {
         this.contestants = contestants;
       });
