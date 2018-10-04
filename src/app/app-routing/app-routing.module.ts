@@ -20,7 +20,7 @@ export const appRoutes: Routes = [
   {
     path: 'admin',
     children: [
-      { 
+      {
         path: '',
         component: AdminComponent, canActivate: [AuthGuard],
       },
@@ -50,7 +50,7 @@ export const appRoutes: Routes = [
   {
     path: 'judge',
     component: JudgeComponent, canActivate: [AuthGuard]
-  },  
+  },
   {
     path: '**',
     redirectTo: '/home',

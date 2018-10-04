@@ -35,7 +35,7 @@ export class ResultsComponent implements OnInit, OnDestroy {
 
   private startLoop() {
     this.looper = setInterval(() => {
-      this.loading = true; 
+      this.loading = true;
       timer(5000).subscribe( () => this.getResults() );
     }, 20000);
   }

@@ -152,7 +152,7 @@ export class GrillOffService {
       localStorage.setItem('currentUser', JSON.stringify(p));
     };
     const url = host + '/' + baseUrl.user;
-    const options: {} = Object.assign({params: {name: person.name, email: person.email}}, 
+    const options: {} = Object.assign({params: {name: person.name, email: person.email}},
                                   {observe: 'response'},
                                    httpOptions);
     // saveLocal(this.judges[2]);
@@ -177,13 +177,13 @@ export class GrillOffService {
  */
 private handleError<T> (operation = 'operation', result?: T) {
   return (error: any): Observable<T> => {
- 
+
     // TODO: send the error to remote logging infrastructure
     console.error(error); // log to console instead
- 
+
     // TODO: better job of transforming error for user consumption
     // this.log(`${operation} failed: ${error.message}`);
- 
+
     // Let the app keep running by returning an empty result.
     return of(result as T);
   };
