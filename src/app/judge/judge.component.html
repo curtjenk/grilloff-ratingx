@@ -1,16 +1,69 @@
-<div class="">
+
   <div *ngIf="error" class="alert alert-danger" role="alert">
     Please vote for all contestants
+  </div>
+  <div class="container" *ngFor="let c of contestants">
+    <div class="row">
+      <div class="contestants">
+        <h3>Vote for Contestant <span class="badge">#{{c.id}}</span></h3>
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <span class="category text-align-right">Taste</span>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <ngb-rating [max]="maxStars" class="star" (rateChange)="rateChange('taste',c,$event)">
+          <ng-template let-fill="fill" let-index="index">
+            <span class="star" [class.filled]="fill === 100" 
+              [class.bad]="index < 2" 
+              [class.max]="index === (maxStars - 1)">&#9733;
+            </span>
+          </ng-template>
+        </ngb-rating>
+      </div>
+      <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 mt-3">
+        <div class="shape-section">
+          <div class="diamond-shape">
+            <span [hidden]="!c['taste']" class="shape-item">{{ c['taste'] }}</span>
+            <span [hidden]="c['taste']" class="shape-item">0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+          <span class="category">Appearance</span>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <ngb-rating [max]="maxStars" class="star" (rateChange)="rateChange('appear',c,$event)">
+          <ng-template let-fill="fill" let-index="index">
+            <span class="star" [class.filled]="fill === 100" 
+              [class.bad]="index < 2" 
+              [class.max]="index === (maxStars - 1)">&#9733;
+            </span>
+          </ng-template>
+        </ngb-rating>
+      </div>
+      <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 mt-3">
+        <div class="shape-section">
+          <div class="diamond-shape">
+            <span [hidden]="!c['appear']" class="shape-item">{{ c['appear'] }}</span>
+            <span [hidden]="c['appear']" class="shape-item">0</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div *ngIf="tab===0">
     <h4>Vote on Taste</h4>
     <ul class="contestants">
       <li *ngFor="let c of contestants">
         <div class="row">
-          <div class="col-xs-2 mt-3">
+          <div class="col-xs-4 mt-3">
             <span class="badge">#{{c.id}}</span>
           </div>
-          <div class="col-xs-6">
+          <div class="col-xs-4">
             <ngb-rating [max]="maxStars" class="star" (rateChange)="rateChange('taste',c,$event)">
                 <ng-template let-fill="fill" let-index="index">
                     <span class="star" [class.filled]="fill === 100" 
@@ -99,4 +152,4 @@
     <h4>Submit Your Vote!</h4>
     <button class="mt-4" type="submit" (click)="vote()">Vote!</button>
   </div>
-</div>
+

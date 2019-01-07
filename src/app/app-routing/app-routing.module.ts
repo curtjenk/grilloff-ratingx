@@ -22,22 +22,23 @@ export const appRoutes: Routes = [
     children: [
       {
         path: '',
-        component: AdminComponent, canActivate: [AuthGuard],
+        component: AdminComponent
       },
       {
         path: 'contestants',
-        component: ManageContestantsComponent, canActivate: [AuthGuard]
+        component: ManageContestantsComponent
       },
       {
         path: 'judges',
-        component: ManageJudgesComponent, canActivate: [AuthGuard]
+        component: ManageJudgesComponent
       },
       {
         path: 'results',
-        component: ResultsComponent, canActivate: [AuthGuard]
-      },
-    ]
-
+        component: ResultsComponent
+      }
+    ],
+    canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always'
   },
   {
     path: 'home',
@@ -63,6 +64,7 @@ export const appRoutes: Routes = [
     CommonModule,
     RouterModule.forRoot(
       appRoutes,
+      {onSameUrlNavigation: 'reload'}
       // { enableTracing: true } // <-- debugging purposes only
     )
   ],

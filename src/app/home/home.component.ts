@@ -15,14 +15,15 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getUser();
-    // this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
   getUser() {
     this.grillOffService.currentUser
       .subscribe( 
         (resp) => {
-          // console.log(`---Home Component ----:${resp}`);
+         if (resp) {
           this.currentUser = resp;
+         }
         },
         (error) => {}
       );

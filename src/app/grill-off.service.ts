@@ -152,9 +152,12 @@ export class GrillOffService {
       localStorage.setItem('currentUser', JSON.stringify(p));
     };
     const url = host + '/' + baseUrl.user;
-    const options: {} = Object.assign({params: {name: person.name, email: person.email}},
-                                  {observe: 'response'},
-                                   httpOptions);
+    const options: {} = Object.assign(
+        {params:
+          {name: person.name, email: person.email}
+        },
+        {observe: 'response'},
+        httpOptions);
     // saveLocal(this.judges[2]);
     // return of(this.judges[2]);
     return this.http.get<HttpResponse<Person>>(url, options)
