@@ -146,15 +146,23 @@ export class GrillOffService {
       );
   }
 
+  // async userLogin(person: Person) {
+  //   const value = await this.login(person).toPromise();
+  //   console.log('gos:', value);
+  //   return value;
+  // }
   login(person: Person): Observable<HttpResponse<Person>> {
     const saveLocal = (p) => {
       this._behaviorSubject.next(p);
       localStorage.setItem('currentUser', JSON.stringify(p));
     };
     const url = host + '/' + baseUrl.user;
-    const options: {} = Object.assign({params: {name: person.name, email: person.email}},
-                                  {observe: 'response'},
-                                   httpOptions);
+    const options: {} = Object.assign(
+        {params:
+          {name: person.name, email: person.email}
+        },
+        {observe: 'response'},
+        httpOptions);
     // saveLocal(this.judges[2]);
     // return of(this.judges[2]);
     return this.http.get<HttpResponse<Person>>(url, options)
