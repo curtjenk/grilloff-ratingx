@@ -146,6 +146,11 @@ export class GrillOffService {
       );
   }
 
+  // async userLogin(person: Person) {
+  //   const value = await this.login(person).toPromise();
+  //   console.log('gos:', value);
+  //   return value;
+  // }
   login(person: Person): Observable<HttpResponse<Person>> {
     const saveLocal = (p) => {
       this._behaviorSubject.next(p);
