@@ -2,6 +2,9 @@
   <div *ngIf="error" class="alert alert-danger" role="alert">
     Please vote for all contestants and categories
   </div>
+  <div *ngIf="alreadyVoted" class="alert alert-danger" role="alert">
+    Sorry, you've already voted and can't vote again.
+  </div>
   <div class="" *ngFor="let c of contestants">
     <div class="contestants">
       <h3>Contestant <span class="badge">#{{c.id}}</span></h3>

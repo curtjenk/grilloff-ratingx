@@ -4,8 +4,8 @@ import { Person } from './../person';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DOCUMENT } from '@angular/platform-browser';
 // import { Observable, of } from 'rxjs';
-import { first } from 'rxjs/operators';
-import { Observable, pipe } from 'rxjs';
+import { first, catchError } from 'rxjs/operators';
+import { Observable, pipe, throwError, of } from 'rxjs';
 
 @Component({
   selector: 'app-judge',
@@ -15,6 +15,7 @@ import { Observable, pipe } from 'rxjs';
 export class JudgeComponent implements OnInit {
   windowScrolled: boolean;
   error = false;
+  alreadyVoted = false;
   maxStars: Number = 5;
   contestants: Person[];
   results: any = {};
@@ -65,19 +66,8 @@ export class JudgeComponent implements OnInit {
     this.error = false;
   }
 
-  // doneWithTab(tab: string) {
-  //   const count = this.contestants.filter(c => c[tab]).length;
-  //   if (count === this.contestants.length) {
-  //     this.tab += 1;
-  //     this.error = false;
-  //   } else {
-  //     this.error = true;
-  //   }
-  //   // console.log('count=', count);
-  // }
   vote() {
-    // TODO: Must vote for each person and category
-    console.log(this.contestants);
+    // Must vote for each person and category
     this.error = this.contestants.every( c => {
       return !c.hasOwnProperty('appear') ||
              !c.hasOwnProperty('taste') ||
@@ -85,17 +75,24 @@ export class JudgeComponent implements OnInit {
     });
     if (this.error) {
       this.scrollToTop();
+      return;
     }
-    console.log(this.error);
-    return;
-    // TODO: handle the already voted case
     const person: Person = this.grillOffService.currentUserValue();
     this.grillOffService.vote(person, this.contestants)
+      .pipe(
+        catchError(err => {
+          if (err.status === 409) {  // Already voted
+            this.alreadyVoted = true;
+            this.scrollToTop();
+          }
+          return throwError(err);
+        })
+      )
       .subscribe(
-        (p) => {
+        (res) => {
           // this.grillOffService.logout();
           this.router.navigate(['/admin/results']);
-        },
+        }
       );
   }
 
