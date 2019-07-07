@@ -6,7 +6,7 @@ import {map, delay, tap, catchError} from 'rxjs/operators';
 
 import { Person } from './person';
 import { environment } from '../environments/environment';
-import { validateConfig } from '@angular/router/src/config';
+// import { validateConfig } from '@angular/router/src/config';
 
 const baseUrl = {
   contestants: 'api/contestant',

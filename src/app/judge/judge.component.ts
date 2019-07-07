@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, OnInit, Inject, HostListener } from
 import { GrillOffService } from '../grill-off.service';
 import { Person } from './../person';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DOCUMENT } from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/common';
 // import { Observable, of } from 'rxjs';
 import { first, catchError } from 'rxjs/operators';
 import { Observable, pipe, throwError, of } from 'rxjs';

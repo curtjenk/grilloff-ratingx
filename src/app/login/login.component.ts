@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
     this.error = false;
     const person = new Person(0, this.model.username, this.model.email, null, null);
     this.grillOffService.login(person)
-      // .pipe(first())
       .subscribe(
         data => {
             this.router.navigate([this.returnUrl]);
@@ -42,7 +41,6 @@ export class LoginComponent implements OnInit {
         error => {
             this.loading = false;
             this.error = true;
-            console.log(error);
         });
   }
 }
